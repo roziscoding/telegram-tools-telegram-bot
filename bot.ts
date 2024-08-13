@@ -1,6 +1,6 @@
 import { Bot, InlineKeyboard, InlineQueryResultBuilder } from "./deps.ts";
 
-const bot = new Bot(Deno.env.get("TELEGRAM_TOKEN") ?? "");
+export const bot = new Bot(Deno.env.get("TELEGRAM_TOKEN") ?? "");
 
 const TOOLS = [
   {
@@ -79,11 +79,9 @@ bot.inlineQuery(/.*/, (ctx) => ctx.answerInlineQuery(TOOLS));
 bot.on(
   "message",
   (ctx) =>
-    ctx.reply("I only work inline!", {
+    ctx.reply("I only work inline", {
       reply_markup: new InlineKeyboard([
-        [InlineKeyboard.switchInlineCurrent("Click here to try it!")],
+        [InlineKeyboard.switchInlineCurrent("Click here to try it")],
       ]),
     }),
 );
-
-bot.start();
